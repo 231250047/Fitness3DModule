@@ -140,11 +140,9 @@ namespace Mediapipe.Unity.Sample.Holistic
 
             // 设置初始位置和旋转
             vnectModel.ResetPosition(0, 0, 0);
-            vnectModel.transform.rotation = Quaternion.Euler(0, 180, 0); // 旋转180度面向摄像机
+            vnectModel.transform.rotation = Quaternion.Euler(0, 0, 0);
             vnectModel.SetScale(modelScale);
             vnectModel.SetZScale(zScale);
-
-            Debug.Log("【VNectModelAdapter】角色已旋转180度，面向摄像机");
         }
 
         /// <summary>
@@ -219,49 +217,49 @@ namespace Mediapipe.Unity.Sample.Holistic
             // Calculate spine location：spine = abdomenUpper
             jointPoints[(int)PositionIndex.spine].Pos3D = abdomenUpper;
 
-            // ========== 左臂 ==========
+            // ========== 左臂（使用右侧MediaPipe数据修复镜像）==========
 
-            jointPoints[(int)PositionIndex.lShldrBend].Pos3D = leftShoulder;
-            jointPoints[(int)PositionIndex.lForearmBend].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftElbow);
-            jointPoints[(int)PositionIndex.lHand].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftWrist);
+            jointPoints[(int)PositionIndex.lShldrBend].Pos3D = rightShoulder;
+            jointPoints[(int)PositionIndex.lForearmBend].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightElbow);
+            jointPoints[(int)PositionIndex.lHand].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightWrist);
 
-            // 左拇指（使用 LeftThumb）
-            jointPoints[(int)PositionIndex.lThumb2].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftThumb);
-            // 左中指（使用 LeftIndex）
-            jointPoints[(int)PositionIndex.lMid1].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftIndex);
+            // 左拇指（使用 RightThumb）
+            jointPoints[(int)PositionIndex.lThumb2].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightThumb);
+            // 左中指（使用 RightIndex）
+            jointPoints[(int)PositionIndex.lMid1].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightIndex);
 
-            // ========== 右臂 ==========
+            // ========== 右臂（使用左侧MediaPipe数据修复镜像）==========
 
-            jointPoints[(int)PositionIndex.rShldrBend].Pos3D = rightShoulder;
-            jointPoints[(int)PositionIndex.rForearmBend].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightElbow);
-            jointPoints[(int)PositionIndex.rHand].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightWrist);
+            jointPoints[(int)PositionIndex.rShldrBend].Pos3D = leftShoulder;
+            jointPoints[(int)PositionIndex.rForearmBend].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftElbow);
+            jointPoints[(int)PositionIndex.rHand].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftWrist);
 
-            // 右拇指（使用 RightThumb）
-            jointPoints[(int)PositionIndex.rThumb2].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightThumb);
-            // 右中指（使用 RightIndex）
-            jointPoints[(int)PositionIndex.rMid1].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightIndex);
+            // 右拇指（使用 LeftThumb）
+            jointPoints[(int)PositionIndex.rThumb2].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftThumb);
+            // 右中指（使用 LeftIndex）
+            jointPoints[(int)PositionIndex.rMid1].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftIndex);
 
-            // ========== 左腿 ==========
+            // ========== 左腿（使用右侧MediaPipe数据修复镜像）==========
 
-            jointPoints[(int)PositionIndex.lThighBend].Pos3D = leftHip;
-            jointPoints[(int)PositionIndex.lShin].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftKnee);
-            jointPoints[(int)PositionIndex.lFoot].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftAnkle);
-            jointPoints[(int)PositionIndex.lToe].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftFootIndex);
+            jointPoints[(int)PositionIndex.lThighBend].Pos3D = rightHip;
+            jointPoints[(int)PositionIndex.lShin].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightKnee);
+            jointPoints[(int)PositionIndex.lFoot].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightAnkle);
+            jointPoints[(int)PositionIndex.lToe].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightFootIndex);
 
-            // ========== 右腿 ==========
+            // ========== 右腿（使用左侧MediaPipe数据修复镜像）==========
 
-            jointPoints[(int)PositionIndex.rThighBend].Pos3D = rightHip;
-            jointPoints[(int)PositionIndex.rShin].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightKnee);
-            jointPoints[(int)PositionIndex.rFoot].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightAnkle);
-            jointPoints[(int)PositionIndex.rToe].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightFootIndex);
+            jointPoints[(int)PositionIndex.rThighBend].Pos3D = leftHip;
+            jointPoints[(int)PositionIndex.rShin].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftKnee);
+            jointPoints[(int)PositionIndex.rFoot].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftAnkle);
+            jointPoints[(int)PositionIndex.rToe].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftFootIndex);
 
-            // ========== 面部 ==========
+            // ========== 面部（左右交换修复镜像）==========
 
             jointPoints[(int)PositionIndex.Nose].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.Nose);
-            jointPoints[(int)PositionIndex.lEar].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftEar);
-            jointPoints[(int)PositionIndex.rEar].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightEar);
-            jointPoints[(int)PositionIndex.lEye].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftEye);
-            jointPoints[(int)PositionIndex.rEye].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightEye);
+            jointPoints[(int)PositionIndex.lEar].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightEar);
+            jointPoints[(int)PositionIndex.rEar].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftEar);
+            jointPoints[(int)PositionIndex.lEye].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.RightEye);
+            jointPoints[(int)PositionIndex.rEye].Pos3D = GetLandmarkVector(landmarks, MediaPipePoseLandmark.LeftEye);
 
             // !设置 Visibled = true 
             // 在每次更新数据后都必须设置 Visibled = true
