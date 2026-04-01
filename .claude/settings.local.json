@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find e:Employment软件创新Fitness3DModuleAssetsTest -type f -name *.cs)",
+      "Bash(grep -l \"SimpleCharacterCreator\\\\|character\\\\.fbx\" \"E:\\\\Employment\\\\软件创新\\\\Fitness3DModule\\\\Assets\\\\MediaPipeUnity\\\\Samples\\\\Scenes\\\\Legacy\\\\Holistic\"/*.cs)",
+      "Read(//e/Employment/软件创新/ThreeDPoseTracker/Assets/Scripts/**)",
+      "WebSearch",
+      "Read(//e/Employment/软件创新/**)",
+      "Read(//e/Employment/**)",
+      "Bash(awk 'NR>=575 && NR<=585' MediaPipeToUnityBoneMapper.cs)"
+    ]
+  }
+}
